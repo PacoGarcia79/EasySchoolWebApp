@@ -18,30 +18,4 @@ public class Holiday {
 		FESTIVAL, FEDERAL
 	}
 
-//	public Holiday(String day, String reason, Type type) {  //NO SON NECESARIOS CON LOMBOK DATA
-//		super();
-//		this.day = day;
-//		this.reason = reason;
-//		this.type = type;
-//	}
-
-//	public String getDay() {
-//		return day;
-//	}
-//
-//	public String getReason() {
-//		return reason;
-//	}
-//
-//	public Type getType() {
-//		return type;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "Holiday [day=" + day + ", reason=" + reason + ", type=" + type + "]";
-//	}
-//	
-	
-
 }
