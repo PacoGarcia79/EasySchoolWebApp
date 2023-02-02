@@ -1,7 +1,5 @@
 package com.eazybytes.eazyschool.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +12,9 @@ import com.eazybytes.eazyschool.model.Contact;
 import com.eazybytes.eazyschool.service.ContactService;
 
 import lombok.extern.slf4j.Slf4j;
+
+//import jakarta.validation.Valid;  //EN VERSIÓN 3.0.0. DEL PARENT
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
