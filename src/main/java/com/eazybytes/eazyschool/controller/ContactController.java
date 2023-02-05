@@ -20,8 +20,6 @@ import javax.validation.Valid;
 @Controller
 public class ContactController {
 
-	// private static Logger log = LoggerFactory.getLogger(ContactController.class);
-
 	@Autowired
 	private ContactService contactService;
 
@@ -31,16 +29,6 @@ public class ContactController {
 		return "contact.html";
 	}
 
-//	@PostMapping(value = "/saveMsg")
-//	public ModelAndView saveMessage(@RequestParam String name, @RequestParam String mobileNum,
-//			@RequestParam String email, @RequestParam String subject, @RequestParam String message) {
-//		log.info("Name : " + name);
-//		log.info("Mobile Number : " + mobileNum);
-//		log.info("Email Address : " + email);
-//		log.info("Subject : " + subject);
-//		log.info("Message : " + message);
-//		return new ModelAndView("redirect:/contact");
-//	}
 
 	@PostMapping(value = "/saveMsg")
 	public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors) {

@@ -16,8 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 @ApplicationScope
 public class ContactService {
 
-	// private static Logger log = LoggerFactory.getLogger(ContactService.class);
-
 	private int counter = 0;
 
 	public ContactService() {
