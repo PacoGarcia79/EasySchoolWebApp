@@ -38,7 +38,7 @@ public class ProjectSecurityConfig {
 //                    and().formLogin()
 //                    .and().httpBasic();
 
-		http.csrf().disable() //EN VERSIÓN 3.0.0. DEL PARENT SE USA requestMatchers
+		http.csrf().ignoringAntMatchers("/saveMsg").and() //EN VERSIÓN 3.0.0. DEL PARENT SE USA requestMatchers
         	.authorizeRequests()
         	.mvcMatchers("/dashboard").authenticated()
         	.mvcMatchers("/home").permitAll()
