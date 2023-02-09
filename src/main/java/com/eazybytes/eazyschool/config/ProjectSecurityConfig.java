@@ -1,5 +1,6 @@
 package com.eazybytes.eazyschool.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
@@ -38,7 +39,7 @@ public class ProjectSecurityConfig {
 //                    and().formLogin()
 //                    .and().httpBasic();
 
-		http.csrf().ignoringAntMatchers("/saveMsg").and() //EN VERSIÓN 3.0.0. DEL PARENT SE USA requestMatchers
+		http.csrf().ignoringAntMatchers("/saveMsg").ignoringAntMatchers("/h2-console/**").and() //EN VERSIÓN 3.0.0. DEL PARENT SE USA requestMatchers (revisar código actual
         	.authorizeRequests()
         	.mvcMatchers("/dashboard").authenticated()
         	.mvcMatchers("/home").permitAll()
@@ -47,11 +48,14 @@ public class ProjectSecurityConfig {
         	.mvcMatchers("/saveMsg").permitAll()
         	.mvcMatchers("/courses").permitAll()
         	.mvcMatchers("/about").permitAll()
-        	.mvcMatchers("/login").permitAll()
+        	.mvcMatchers("/login").permitAll()        	
         	.and().formLogin().loginPage("/login")
         	.defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
-        	.and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()        	
+        	.and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()   
+        	.and().authorizeRequests().antMatchers("/h2-console/**").permitAll()
         	.and().httpBasic();        
+		
+		http.headers().frameOptions().disable();  //NO RECOMENDABLE PARA APPS EN PRODUCCIÓN
 
 		return http.build();
 
