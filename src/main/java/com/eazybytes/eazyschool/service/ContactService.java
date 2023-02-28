@@ -1,6 +1,7 @@
 package com.eazybytes.eazyschool.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,11 @@ public class ContactService {
             isSaved = true;
         }
         return isSaved;
+    }
+	
+	public List<Contact> findMsgsWithOpenStatus(){
+        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(EazySchoolConstants.OPEN);
+        return contactMsgs;
     }
 	
 }
