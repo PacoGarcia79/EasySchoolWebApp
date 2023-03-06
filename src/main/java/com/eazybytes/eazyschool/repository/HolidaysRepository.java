@@ -1,19 +1,13 @@
 package com.eazybytes.eazyschool.repository;
 
-import com.eazybytes.eazyschool.model.Contact;
-import com.eazybytes.eazyschool.model.Holiday;
-import com.eazybytes.eazyschool.rommappers.ContactRowMapper;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.List;
+import com.eazybytes.eazyschool.model.Holiday;
 
 /*
 @Repository stereotype annotation is used to add a bean of this class
@@ -31,7 +25,7 @@ public class HolidaysRepository {
     }
 
     public List<Holiday> findAllHolidays() {
-        String sql = "SELECT * FROM HOLIDAYS";
+        String sql = "SELECT * FROM holidays";
         var rowMapper = BeanPropertyRowMapper.newInstance(Holiday.class);
         return jdbcTemplate.query(sql, rowMapper);
     }

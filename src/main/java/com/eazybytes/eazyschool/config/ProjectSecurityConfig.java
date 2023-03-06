@@ -39,25 +39,25 @@ public class ProjectSecurityConfig {
 //                    and().formLogin()
 //                    .and().httpBasic();
 
-		http.csrf().ignoringAntMatchers("/saveMsg").ignoringAntMatchers("/h2-console/**").and() //EN VERSIÓN 3.0.0. DEL PARENT SE USA requestMatchers (revisar código actual
+		http.csrf().ignoringAntMatchers("/saveMsg").and() //EN VERSIÓN 3.0.0. DEL PARENT SE USA requestMatchers (revisar código actual
         	.authorizeRequests()
         	.mvcMatchers("/dashboard").authenticated()
         	.mvcMatchers("/displayMessages").hasRole("ADMIN")
+        	.mvcMatchers("/closeMsg/**").hasRole("ADMIN")
         	.mvcMatchers("/home").permitAll()
         	.mvcMatchers("/holidays/**").permitAll()
         	.mvcMatchers("/contact").permitAll()
         	.mvcMatchers("/saveMsg").permitAll()
         	.mvcMatchers("/courses").permitAll()
         	.mvcMatchers("/about").permitAll()
-        	.mvcMatchers("/login").permitAll()        	
+        	.mvcMatchers("/login").permitAll()     
+        	.mvcMatchers("/logout").permitAll()
+        	.mvcMatchers("/assets/**").permitAll()
         	.and().formLogin().loginPage("/login")
         	.defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
-        	.and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()   
-        	.and().authorizeRequests().antMatchers("/h2-console/**").permitAll()
+        	.and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()          	
         	.and().httpBasic();        
-		
-		http.headers().frameOptions().disable();  //NO RECOMENDABLE PARA APPS EN PRODUCCIÓN
-
+				
 		return http.build();
 
 	}
