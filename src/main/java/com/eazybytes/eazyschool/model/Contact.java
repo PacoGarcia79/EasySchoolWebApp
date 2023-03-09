@@ -1,6 +1,13 @@
 package com.eazybytes.eazyschool.model;
 
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 //EN VERSIÓN 3.0.0. DEL PARENT
 //import jakarta.validation.constraints.Email; 
 //import jakarta.validation.constraints.NotBlank;
@@ -12,6 +19,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import lombok.Data;
 
 /*
@@ -20,11 +29,17 @@ equals(), hashCode(), toString() methods & Constructor at compile time.
 This makes our code short and clean.
 * */
 @Data
+@Entity
+@Table(name="contact_msg")
 public class Contact extends BaseEntity{
 
 	// LOS NOMBRES DE TODOS ESTOS PARÁMETROS DEBEN COINCIDIR CON LOS DE LA FORM DEL
 	// HTML
 	
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+    @GenericGenerator(name = "native",strategy = "native")
+    @Column(name = "contact_id")
 	private int contactId;
 
 	/*
