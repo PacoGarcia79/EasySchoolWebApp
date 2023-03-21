@@ -39,7 +39,7 @@ public class ProjectSecurityConfig {
 //                    and().formLogin()
 //                    .and().httpBasic();
 
-		http.csrf().ignoringAntMatchers("/saveMsg").and() //EN VERSIÓN 3.0.0. DEL PARENT SE USA requestMatchers (revisar código actual
+		http.csrf().ignoringAntMatchers("/saveMsg").ignoringAntMatchers("/public/**").and() //EN VERSIÓN 3.0.0. DEL PARENT SE USA requestMatchers (revisar código actual
         	.authorizeRequests()
         	.mvcMatchers("/dashboard").authenticated()
         	.mvcMatchers("/displayMessages").hasRole("ADMIN")
@@ -52,6 +52,7 @@ public class ProjectSecurityConfig {
         	.mvcMatchers("/about").permitAll()
         	.mvcMatchers("/login").permitAll()     
         	.mvcMatchers("/logout").permitAll()
+        	.mvcMatchers("/public/**").permitAll()
         	.mvcMatchers("/assets/**").permitAll()
         	.and().formLogin().loginPage("/login")
         	.defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
