@@ -63,22 +63,22 @@ public class ProjectSecurityConfig {
 
 	}
 	
-	@Bean
-    @Description("In memory Userdetails service registered since DB doesn't have user table ")
-    public UserDetailsService users() {
-        // The builder will ensure the passwords are encoded before saving in memory
-        UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder().encode("12345"))
-                .roles("USER")
-                .build();
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("54321"))
-                .roles("USER", "ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }
+//	@Bean //NO SE NECESITA SI COGEMOS LAS CREDENCIALES DESDE BBDD
+//    @Description("In memory Userdetails service registered since DB doesn't have user table ")
+//    public UserDetailsService users() {
+//        // The builder will ensure the passwords are encoded before saving in memory
+//        UserDetails user = User.builder()
+//                .username("user")
+//                .password(passwordEncoder().encode("12345"))
+//                .roles("USER")
+//                .build();
+//        UserDetails admin = User.builder()
+//                .username("admin")
+//                .password(passwordEncoder().encode("54321"))
+//                .roles("USER", "ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(user, admin);
+//    }
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
