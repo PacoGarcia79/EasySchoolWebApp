@@ -44,6 +44,8 @@ public class ProjectSecurityConfig {
         	.mvcMatchers("/dashboard").authenticated()
         	.mvcMatchers("/displayMessages").hasRole("ADMIN")
         	.mvcMatchers("/closeMsg/**").hasRole("ADMIN")
+        	.mvcMatchers("/displayProfile").authenticated()
+            .mvcMatchers("/updateProfile").authenticated()
         	.mvcMatchers("/home").permitAll()
         	.mvcMatchers("/holidays/**").permitAll()
         	.mvcMatchers("/contact").permitAll()
