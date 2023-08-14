@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eazybytes.eazyschool.model.Courses;
 import com.eazybytes.eazyschool.model.EazyClass;
 import com.eazybytes.eazyschool.model.Person;
+import com.eazybytes.eazyschool.repository.CoursesRepository;
 import com.eazybytes.eazyschool.repository.EazyClassRepository;
 import com.eazybytes.eazyschool.repository.PersonRepository;
 
@@ -33,6 +35,9 @@ public class AdminController {
 
     @Autowired
     PersonRepository personRepository;
+    
+    @Autowired
+    CoursesRepository coursesRepository;
 
     @RequestMapping("/displayClasses")
     public ModelAndView displayClasses(Model model) {
@@ -105,6 +110,39 @@ public class AdminController {
         EazyClass eazyClassSaved = eazyClassRepository.save(eazyClass);
         session.setAttribute("eazyClass",eazyClassSaved);
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayStudents?classId="+eazyClass.getClassId());
+        return modelAndView;
+    }
+    
+    @GetMapping("/displayCourses")
+    public ModelAndView displayCourses(Model model) {
+        List<Courses> courses = coursesRepository.findAll();
+        ModelAndView modelAndView = new ModelAndView("courses_secure.html");
+        modelAndView.addObject("courses",courses);
+        modelAndView.addObject("course", new Courses());
+        return modelAndView;
+    }
+    
+    @PostMapping("/addNewCourse")
+    public ModelAndView addNewCourse(Model model, @ModelAttribute("course") Courses course) {
+        ModelAndView modelAndView = new ModelAndView();
+        coursesRepository.save(course);
+        modelAndView.setViewName("redirect:/admin/displayCourses");
+        return modelAndView;
+    }
+    
+    @GetMapping("/viewStudents")
+    public ModelAndView viewStudents(Model model, @RequestParam int id
+                 ,HttpSession session,@RequestParam(required = false) String error) {
+        String errorMessage = null;
+        ModelAndView modelAndView = new ModelAndView("course_students.html");
+        Optional<Courses> courses = coursesRepository.findById(id);
+        modelAndView.addObject("courses",courses.get());
+        modelAndView.addObject("person",new Person());
+        session.setAttribute("courses",courses.get());
+        if(error != null) {
+            errorMessage = "Invalid Email entered!!";
+            modelAndView.addObject("errorMessage", errorMessage);
+        }
         return modelAndView;
     }
 }
