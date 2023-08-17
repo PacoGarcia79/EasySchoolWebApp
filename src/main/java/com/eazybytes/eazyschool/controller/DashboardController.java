@@ -20,11 +20,14 @@ public class DashboardController {
 	@Autowired
     PersonRepository personRepository;
 
-    @RequestMapping("/dashboard")
+	@RequestMapping("/dashboard")
     public String displayDashboard(Model model,Authentication authentication, HttpSession session) {
         Person person = personRepository.readByEmail(authentication.getName());
         model.addAttribute("username", person.getName());
         model.addAttribute("roles", authentication.getAuthorities().toString());
+        if(null != person.getEazyClass() && null != person.getEazyClass().getName()){
+            model.addAttribute("enrolledClass", person.getEazyClass().getName());
+        }
         session.setAttribute("loggedInPerson", person);
         return "dashboard.html";
     }
