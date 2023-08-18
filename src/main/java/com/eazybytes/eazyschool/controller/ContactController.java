@@ -74,7 +74,7 @@ public class ContactController {
         modelAndView.addObject("contactMsgs",contactMsgs);
         return modelAndView;
     }
-
+    
     @RequestMapping(value = "/closeMsg",method = GET)
     public String closeMsg(@RequestParam int id) {
         contactService.updateMsgStatus(id);
