@@ -42,7 +42,7 @@ public class ProjectSecurityConfig {
 		http.csrf().ignoringAntMatchers("/saveMsg").ignoringAntMatchers("/public/**").and() //EN VERSIÓN 3.0.0. DEL PARENT SE USA requestMatchers (revisar código actual
         	.authorizeRequests()
         	.mvcMatchers("/dashboard").authenticated()
-        	.mvcMatchers("/displayMessages").hasRole("ADMIN")
+        	.mvcMatchers("/displayMessages/**").hasRole("ADMIN")
         	.mvcMatchers("/admin/**").hasRole("ADMIN")
         	.mvcMatchers("/closeMsg/**").hasRole("ADMIN")
         	.mvcMatchers("/displayProfile").authenticated()
